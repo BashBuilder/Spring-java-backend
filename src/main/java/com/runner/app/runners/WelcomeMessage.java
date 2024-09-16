@@ -1,4 +1,4 @@
-package foo.bar;
+package com.runner.app.runners;
 
 import org.springframework.stereotype.Component;
 
