@@ -1,5 +1,6 @@
 package com.runner.app.runners.run;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class RunController {
     Run getRunById(@PathVariable Integer id){
         Optional<Run> run = runRepository.findById(id);
         if(run.isEmpty()) {
-            throw new IllegalStateException("No run found");
+            throw new RuntimeException("run is not found ");
         }
         return run.get();
     }
@@ -32,7 +33,7 @@ public class RunController {
 //    post request
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    void create( @RequestBody Run run){
+    void create(@Valid @RequestBody Run run){
         runRepository.create(run);
     }
 
