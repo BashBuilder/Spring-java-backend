@@ -1,9 +1,7 @@
 package com.runner.app.runners.run;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -25,10 +23,31 @@ public class RunController {
     @GetMapping("/{id}")
     Run getRunById(@PathVariable Integer id){
         Optional<Run> run = runRepository.findById(id);
-
         if(run.isEmpty()) {
             throw new IllegalStateException("No run found");
         }
         return run.get();
     }
+
+//    post request
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    void create( @RequestBody Run run){
+        runRepository.create(run);
+    }
+
+//    update requests
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    void update(@PathVariable  Integer id, @RequestBody Run run){
+        runRepository.update(run, id);
+    }
+//    delete request
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable Integer id){
+        runRepository.delete(id);
+    }
+
 }

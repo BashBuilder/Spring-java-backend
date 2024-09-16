@@ -9,7 +9,7 @@ import java.util.*;
 
 @Repository
 public class RunRepository {
-    private List<Run> runs = new ArrayList<Run>();
+    private final List<Run> runs = new ArrayList<Run>();
 
     List<Run> findAll() {
         return runs;
@@ -19,6 +19,23 @@ public class RunRepository {
         return runs
                 .stream()
                 .filter(run -> run.id() == id).findFirst();
+    }
+
+    void create(Run run) {
+        runs.add(run);
+    }
+
+    void update(Run run, Integer id) {
+        Optional<Run> existingRun = findById(id);
+        existingRun.ifPresent(value -> runs.set(runs.indexOf(value), run));
+//        it can also be applied like this down here
+//        if (existingRun.isPresent()) {
+//            runs.set(runs.indexOf(existingRun.get()), run);
+//        }
+    }
+
+    void delete(Integer id) {
+        runs.removeIf(run -> run.id() == id);
     }
 
     @PostConstruct
