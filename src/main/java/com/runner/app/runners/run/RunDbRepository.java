@@ -67,7 +67,7 @@ public class RunDbRepository {
         );
     }
 
-    public void update(Run run, Integer id) {
+    public void update( Integer id, Run run) {
         String query =
                 "UPDATE `run` SET title =?, miles =?, started_on =?, completed_on =?, location =? WHERE id =?";
         jdbcClient.update(query,

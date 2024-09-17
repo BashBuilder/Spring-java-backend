@@ -34,7 +34,7 @@ public class RunDbController {
 
     @PutMapping("/{id}")
     public void update(@PathVariable int id, @RequestBody Run run) {
-        runDbRepository.update(run, id);
+        runDbRepository.update(id, run);
     }
 
     @DeleteMapping("/{id}")
