@@ -29,7 +29,6 @@ public class RunController {
         }
         return run.get();
     }
-
 //    post request
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
@@ -50,5 +49,4 @@ public class RunController {
     void delete(@PathVariable Integer id){
         runRepository.delete(id);
     }
-
 }
