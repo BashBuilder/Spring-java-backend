@@ -40,6 +40,20 @@ public class RunDbRepository {
         }
     }
 
+    public void saveAll(List<Run> runs){
+        String query = "INSERT INTO `run` (id, title, miles, started_on, completed_on, location) VALUES (?,?,?,?,?,?)";
+        for (Run run : runs) {
+            jdbcClient.update(query,
+                run.id(),
+                run.title(),
+                run.miles(),
+                run.startedon(),
+                run.completedon(),
+                run.location().name()
+            );
+        }
+    }
+
     public Optional<Run> findById(Integer id){
         String query = "SELECT * FROM `run` WHERE id = ?";
         Run run = jdbcClient.queryForObject(query, new Object[]{id}, (rs, rowNum) ->
@@ -83,5 +97,9 @@ public class RunDbRepository {
     public void delete(Integer id) {
         String query = "DELETE FROM `run` WHERE id =?";
         jdbcClient.update(query, id);
+    }
+
+    public Integer count(){
+        return jdbcClient.queryForObject("SELECT COUNT(*) FROM `run`", Integer.class);
     }
 }

@@ -2,6 +2,7 @@ package com.runner.app.runners;
 
 import com.runner.app.runners.run.Location;
 import com.runner.app.runners.run.Run;
+import com.runner.app.runners.run.RunDbRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -26,12 +27,9 @@ public class Application {
 	}
 
 	@Bean
-	CommandLineRunner runner() {
+	CommandLineRunner runner(RunDbRepository runDbRepository) {
 		return args -> {
-            log.info("Application started with args: {}", args);
-			Run run = new Run(1, "today",  20, LocalDateTime.now(), LocalDateTime.now().plus(1, ChronoUnit.HOURS), Location.INDOOR);
-
-			log.info("running info" + run);
+            log.info("Application started Successfully");
         };
 	};
 
