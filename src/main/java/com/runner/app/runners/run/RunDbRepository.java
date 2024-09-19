@@ -41,7 +41,7 @@ public class RunDbRepository {
     }
 
     public void saveAll(List<Run> runs){
-        String query = "INSERT INTO `run` (id, title, miles, started_on, completed_on, location) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO `Run` (id, title, miles, started_on, completed_on, location) VALUES (?,?,?,?,?,?)";
         for (Run run : runs) {
             jdbcClient.update(query,
                 run.id(),
