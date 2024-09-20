@@ -19,8 +19,7 @@ import java.time.temporal.ChronoUnit;
 @SpringBootApplication
 public class Application {
 
-	private  static final Logger log = LoggerFactory.getLogger(Application.class);
-
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -29,8 +28,8 @@ public class Application {
 	@Bean
 	CommandLineRunner runner(RunDbRepository runDbRepository) {
 		return args -> {
-            log.info("Application started Successfully");
-        };
+			log.info("Application started Successfully");
+		};
 	};
 
 }
