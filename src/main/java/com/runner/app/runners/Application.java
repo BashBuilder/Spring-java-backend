@@ -25,11 +25,13 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-//	@Bean
-//	CommandLineRunner runner(RunDbRepository runDbRepository) {
-//		return args -> {
-//			log.info("Application started Successfully");
-//		};
-//	};
+
+//	the bean and command line runner runs the first time when the application starts the first time
+	@Bean
+	CommandLineRunner runner(RunDbRepository runDbRepository) {
+		return args -> {
+			log.info("Application started Successfully");
+		};
+	};
 
 }
