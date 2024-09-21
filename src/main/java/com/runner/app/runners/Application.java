@@ -25,11 +25,11 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean
-	CommandLineRunner runner(RunDbRepository runDbRepository) {
-		return args -> {
-			log.info("Application started Successfully");
-		};
-	};
+//	@Bean
+//	CommandLineRunner runner(RunDbRepository runDbRepository) {
+//		return args -> {
+//			log.info("Application started Successfully");
+//		};
+//	};
 
 }
