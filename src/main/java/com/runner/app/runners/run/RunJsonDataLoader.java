@@ -25,7 +25,7 @@ public class RunJsonDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(runDbRepository.count() == 1) {
+        if(runDbRepository.count() <= 1) {
             log.info("Runs not found in the in-memory database, loading from json data");
             try (InputStream inputStream = TypeReference.class.getResourceAsStream("/data/runs.json")) {
                 Runs allRuns = objectMapper.readValue(inputStream, Runs.class);

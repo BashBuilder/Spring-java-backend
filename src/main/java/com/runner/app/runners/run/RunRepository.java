@@ -17,8 +17,8 @@ public class RunRepository {
 
     Optional<Run> findById(int id) {
         return runs
-                .stream()
-                .filter(run -> run.id() == id).findFirst();
+            .stream()
+            .filter(run -> run.id() == id).findFirst();
     }
 
     void create(Run run) {
@@ -38,10 +38,10 @@ public class RunRepository {
         runs.removeIf(run -> run.id() == id);
     }
 
-    @PostConstruct
-    private void init() {
-        runs.add(new Run(1, "today", 20, LocalDateTime.now(), LocalDateTime.now().plus(1, ChronoUnit.HOURS), Location.INDOOR));
-        runs.add(new Run(2, "yesterday", 15, LocalDateTime.now().minus(1, ChronoUnit.DAYS), LocalDateTime.now(), Location.OUTDOOR));
-    }
+//    @PostConstruct
+//    private void init() {
+//        runs.add(new Run(1, "today", 20, LocalDateTime.now(), LocalDateTime.now().plus(1, ChronoUnit.HOURS), Location.INDOOR), 0);
+//        runs.add(new Run(2, "yesterday", 15, LocalDateTime.now().minus(1, ChronoUnit.DAYS), LocalDateTime.now(), Location.OUTDOOR));
+//    }
 
 }

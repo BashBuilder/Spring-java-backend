@@ -9,37 +9,37 @@ import java.util.List;
 @RequestMapping("/api/data/runs")
 public class RunDataController {
 
-    private final RunDbRepository runDbRepository;
-    public RunDataController(RunDbRepository runDbRepository) {
-        this.runDbRepository = runDbRepository;
+    private final RunDataRepository runDataRepository;
+    public RunDataController(RunDataRepository runDataRepository) {
+        this.runDataRepository = runDataRepository;
     }
 
     @GetMapping("")
     public List<Run> initialize() {
-        return runDbRepository.findAll();
+        return runDataRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Run getById(@PathVariable Integer id) {
-        if(!runDbRepository.findById(id).isPresent()){
+        if(!runDataRepository.findById(id).isPresent()){
             throw new RunNotFoundException("No such id in the database");
         }
-        return runDbRepository.findById(id).get();
+        return runDataRepository.findById(id).get();
     }
 
-    @PostMapping("")
-    public void create(@Valid @RequestBody Run run) {
-        runDbRepository.create(run);
-    }
-
-    @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody Run run) {
-        runDbRepository.update(id, run);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        runDbRepository.delete(id);
-    }
+//    @PostMapping("")
+//    public void create(@Valid @RequestBody Run run) {
+//        runDataRepository.create(run);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public void update(@PathVariable int id, @RequestBody Run run) {
+//        runDataRepository.update(id, run);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void delete(@PathVariable int id) {
+//        runDataepository.delete(id);
+//    }
 }
 

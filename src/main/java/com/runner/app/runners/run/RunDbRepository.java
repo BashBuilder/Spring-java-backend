@@ -31,7 +31,8 @@ public class RunDbRepository {
                     rs.getInt("miles"),
                     rs.getTimestamp("started_on").toLocalDateTime(),
                     rs.getTimestamp("completed_on").toLocalDateTime(),
-                    Location.valueOf(rs.getString("location").toUpperCase())
+                    Location.valueOf(rs.getString("location").toUpperCase()),
+                    rs.getInt("version")
                 ));
         } catch (Exception e) {
             // Log the exception and rethrow or handle it
@@ -63,7 +64,8 @@ public class RunDbRepository {
                 rs.getInt("miles"),
                 rs.getTimestamp("started_on").toLocalDateTime(),
                 rs.getTimestamp("completed_on").toLocalDateTime(),
-                Location.valueOf(rs.getString("location").toUpperCase())
+                Location.valueOf(rs.getString("location").toUpperCase()),
+                rs.getInt("version")
             ));
         return Optional.ofNullable(run);
     }
