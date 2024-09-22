@@ -10,8 +10,11 @@ import java.util.List;
 public class RunDataController {
 
     private final RunDataRepository runDataRepository;
-    public RunDataController(RunDataRepository runDataRepository) {
+    private final RunDbRepository runDbRepository;
+
+    public RunDataController(RunDataRepository runDataRepository, RunDbRepository runDbRepository) {
         this.runDataRepository = runDataRepository;
+        this.runDbRepository = runDbRepository;
     }
 
     @GetMapping("")
@@ -27,19 +30,19 @@ public class RunDataController {
         return runDataRepository.findById(id).get();
     }
 
-//    @PostMapping("")
-//    public void create(@Valid @RequestBody Run run) {
-//        runDataRepository.create(run);
-//    }
+    @PostMapping("")
+    public void create(@Valid @RequestBody Run run) {
+        runDataRepository.save(run);
+    }
 //
 //    @PutMapping("/{id}")
-//    public void update(@PathVariable int id, @RequestBody Run run) {
-//        runDataRepository.update(id, run);
-//    }
+    public void update(@PathVariable int id, @RequestBody Run run) {
+        runDataRepository.updateBy(id, run);
+    }
 //
-//    @DeleteMapping("/{id}")
-//    public void delete(@PathVariable int id) {
-//        runDataepository.delete(id);
-//    }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        runDataRepository.delete(runDbRepository.findById(id).get());
+    }
 }
 
