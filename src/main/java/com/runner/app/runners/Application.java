@@ -3,6 +3,8 @@ package com.runner.app.runners;
 import com.runner.app.runners.run.Location;
 import com.runner.app.runners.run.Run;
 import com.runner.app.runners.run.RunDbRepository;
+import com.runner.app.runners.user.User;
+import com.runner.app.runners.user.UserRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @SpringBootApplication
 public class Application {
@@ -28,9 +31,14 @@ public class Application {
 
 //	the bean and command line runner runs the first time when the application starts the first time
 	@Bean
-	CommandLineRunner runner(RunDbRepository runDbRepository) {
+	CommandLineRunner runner(UserRestClient client) {
 		return args -> {
-			log.info("Application started Successfully");
+			List<User> users = client.getUsers();
+
+			User singleUser = client.getUserById(1);
+
+			System.out.println(singleUser);
+
 		};
 	};
 
