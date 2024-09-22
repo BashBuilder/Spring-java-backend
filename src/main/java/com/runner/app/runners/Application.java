@@ -4,6 +4,7 @@ import com.runner.app.runners.run.Location;
 import com.runner.app.runners.run.Run;
 import com.runner.app.runners.run.RunDbRepository;
 import com.runner.app.runners.user.User;
+import com.runner.app.runners.user.UserInterfaceRestClient;
 import com.runner.app.runners.user.UserRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,9 @@ import org.springframework.cglib.core.Local;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.support.RestClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -28,16 +32,32 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	@Bean
+	UserInterfaceRestClient userInterfaceRestClient() {
+		RestClient restClient = RestClient.create("https://jsonplaceholder.typicode.com/");
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
+		return factory.createClient(UserInterfaceRestClient.class);
+
+	}
+
 
 //	the bean and command line runner runs the first time when the application starts the first time
 	@Bean
-	CommandLineRunner runner(UserRestClient client) {
+	CommandLineRunner runner(UserInterfaceRestClient client) {
 		return args -> {
-			List<User> users = client.getUsers();
+//			List<User> users = client.getUsers();
+//
+//			User singleUser = client.getUserById(1);
+//
+//			System.out.println(singleUser);
 
-			User singleUser = client.getUserById(1);
+			List<User> users = client.findAll();
 
-			System.out.println(singleUser);
+
+
+//			User singleUser = client.getUserById(1);
+//
+			System.out.println(users);
 
 		};
 	};
