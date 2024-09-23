@@ -43,21 +43,13 @@ public class Application {
 
 //	the bean and command line runner runs the first time when the application starts the first time
 	@Bean
-	CommandLineRunner runner(UserInterfaceRestClient client) {
+	CommandLineRunner runner(UserRestClient client) {
 		return args -> {
-//			List<User> users = client.getUsers();
-//
-//			User singleUser = client.getUserById(1);
-//
-//			System.out.println(singleUser);
+			List<User> users = client.getUsers();
 
-//			List<User> users = client.findAll();
+			User singleUser = client.getUserById(1);
 
-
-
-//			User singleUser = client.getUserById(1);
-//
-//			System.out.println(users);
+			System.out.println(singleUser);
 
 		};
 	};
