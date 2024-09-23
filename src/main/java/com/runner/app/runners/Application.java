@@ -51,13 +51,13 @@ public class Application {
 //
 //			System.out.println(singleUser);
 
-			List<User> users = client.findAll();
+//			List<User> users = client.findAll();
 
 
 
 //			User singleUser = client.getUserById(1);
 //
-			System.out.println(users);
+//			System.out.println(users);
 
 		};
 	};
